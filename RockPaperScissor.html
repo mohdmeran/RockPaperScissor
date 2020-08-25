@@ -1,0 +1,38 @@
+<html>
+	<body>
+		<script>
+			//rock beat scissor
+			//scissor beat paper
+			//paper beat rock
+
+			var choices = ["paper", "scissor", "rock"];
+
+			function playRound(player1Choice, compChoice){
+
+				player1Choice = choices.indexOf(player1Choice.toLowerCase());
+
+				console.log("Player1: " + choices[player1Choice]);
+				console.log("Computer: " + choices[compChoice]);
+
+				result = player1Choice - compChoice;
+
+				if(player1Choice == compChoice){
+					return "Draw!";
+				}
+				else if(result == 1 || result == -2){
+					return "You Win! " + choices[player1Choice] + " beats " + choices[compChoice];
+				}
+				else{
+					return "You Lose! " + choices[compChoice] + " beats " + choices[player1Choice];
+				}
+			}
+
+			const player1Choice = prompt();
+			const compChoice = Math.floor(Math.random() * 3);
+
+			console.log(playRound(player1Choice, compChoice));
+
+
+		</script>
+	</body>
+</html>
