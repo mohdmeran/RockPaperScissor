@@ -1,38 +1,91 @@
 <html>
+	<head>
+
+		<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+		
+		<style>
+			body{
+				font-family: 'Russo One', sans-serif;
+			}
+		</style>
+	</head>
 	<body>
-		<script>
+		<h1>Rock Paper Scissor!</h1>
+
+		<div id="scoreboard">
+			<p id="playerScore"></p>
+			<p id="compScore"></p>
+			<p id="round"></p>
+		</div>
+		<hr>
+		<div id="choices">
+			<p id="playerChoice"></p>
+			<p id="compChoice"></p>		</div>
+
+		<div>
+			<p id="result"></p>
+		</div>
+
+		<button id="rock" class="playBtn">Rock</button>
+		<button id="paper" class="playBtn">Paper</button>
+		<button id="scissor" class="playBtn">Scissor</button>
+
+	</body>
+</html>
+
+<script>
 			//rock beat scissor
 			//scissor beat paper
 			//paper beat rock
+	function reset(){
+		playerScore = 0;
+		compScore = 0;
+		round = 0;
+	}
 
-			var choices = ["paper", "scissor", "rock"];
+	function playRound(e){
+						//0         1         2
+		let choices = ["paper", "scissor", "rock"];
 
-			function playRound(player1Choice, compChoice){
+		let playerChoice = choices.indexOf(e.target.id);
+		let compChoice = Math.floor(Math.random() * 3);
 
-				player1Choice = choices.indexOf(player1Choice.toLowerCase());
+		//set Text for choice
+		playerChoiceText.textContent = `player choice: ${e.target.id}`;
+		compChoiceText.textContent = `computer choice: ${choices[compChoice]}`;
 
-				console.log("Player1: " + choices[player1Choice]);
-				console.log("Computer: " + choices[compChoice]);
+		result = playerChoice - compChoice;
 
-				result = player1Choice - compChoice;
+		if(playerChoice == compChoice){
+			resultText.textContent = "Draw!";
+		}
+		else if(result == 1 || result == -2){
+			playerScore++;
+			resultText.textContent = "Round Win! " + choices[playerChoice] + " beats " + choices[compChoice];
+		}
+		else{
+			compScore++;
+			resultText.textContent = "Round Lose! " + choices[compChoice] + " beats " + choices[playerChoice];
+		}
 
-				if(player1Choice == compChoice){
-					return "Draw!";
-				}
-				else if(result == 1 || result == -2){
-					return "You Win! " + choices[player1Choice] + " beats " + choices[compChoice];
-				}
-				else{
-					return "You Lose! " + choices[compChoice] + " beats " + choices[player1Choice];
-				}
-			}
+		round++;
 
-			const player1Choice = prompt();
-			const compChoice = Math.floor(Math.random() * 3);
+	}
 
-			console.log(playRound(player1Choice, compChoice));
+	var playerScore = 0;
+	var compScore = 0;
+	var round = 0;
+
+	var playerChoiceText = document.querySelector("#playerChoice");
+	var compChoiceText = document.querySelector("#compChoice");
+	var resultText = document.querySelector("#result");
+	const playBtns = document.querySelectorAll(".playBtn");
+
+	playBtns.forEach(playBtn => playBtn.addEventListener("click", playRound));
 
 
-		</script>
-	</body>
-</html>
+			
+			
+
+
+</script>
